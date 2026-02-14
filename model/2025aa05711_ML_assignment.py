@@ -51,12 +51,6 @@ for column in data.columns:
         data[column] = le.fit_transform(data[column])
         label_encoders[column] = le
 
-# num_columns = data.shape[1]
-# print(f"Number of columns in the DataFrame: {num_columns}")
-
-# num_rows = y_test.shape[0]
-# print(f"Number of rows in the DataFrame: {num_rows}")
-
 X = data.drop("income", axis=1)
 y = data["income"]
 
@@ -92,7 +86,9 @@ for name, model in models.items():
         "MCC": matthews_corrcoef(y_test, y_pred)
     }
 
-    joblib.dump(model, f"{name}.pkl")
+    # joblib.dump(model, f"{name}.pkl")
+    safe_name = name.replace(" ", "_")
+    joblib.dump(model, f"{safe_name}.pkl")
 
 print("\nModel Evaluation Results:\n")
 for model_name, metrics in results.items():
