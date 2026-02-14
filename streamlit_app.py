@@ -4,14 +4,14 @@ import joblib
 import numpy as np
 from sklearn.metrics import classification_report, confusion_matrix
 
-st.title("Income Classification App")
+st.title("Income Classification App for BITS")
 st.write("Machine Learning Classification Models Deployment")
 
 # Upload CSV
-uploaded_file = st.file_uploader("Upload Test CSV File", type=["csv"])
+uploaded_file = st.file_uploader("Upload the csv file", type=["csv"])
 
 model_option = st.selectbox(
-    "Select Model",
+    "Select the Model",
     ["Logistic Regression", "Decision Tree", "KNN",
      "Naive Bayes", "Random Forest", "XGBoost"]
 )
@@ -19,9 +19,9 @@ model_option = st.selectbox(
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
 
-    # model = joblib.load(f"{model_option}.pkl")
-    safe_name = model_option.replace(" ", "_")
-    model = joblib.load(f"model/{safe_name}.pkl")
+
+    name = model_option.replace(" ", "_")
+    model = joblib.load(f"model/{name}.pkl")
 
     X = data.drop("income", axis=1)
     y = data["income"]
