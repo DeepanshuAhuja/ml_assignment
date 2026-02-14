@@ -19,7 +19,9 @@ model_option = st.selectbox(
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
 
-    model = joblib.load(f"{model_option}.pkl")
+    # model = joblib.load(f"{model_option}.pkl")
+    safe_name = model_option.replace(" ", "_")
+    model = joblib.load(f"model/{safe_name}.pkl")
 
     X = data.drop("income", axis=1)
     y = data["income"]
